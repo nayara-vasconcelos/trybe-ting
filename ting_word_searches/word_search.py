@@ -5,9 +5,11 @@ def get_all_files(instance):
     files = []
 
     if len(instance) > 0:
-        for i in range(0, len(instance)):
-            file = instance.search(i)
-            files.append(file)
+        # É mais interessante fazer unqueue e queue por
+        # len(instance) vezes para manter a complexidade
+        # de tempo O(n) em vez de O(n²)?
+        for i in range(0, len(instance)):  # O(n)
+            files.append(instance.search(i))  # O(n)
 
     return files
 
@@ -15,7 +17,7 @@ def get_all_files(instance):
 def find_occurrences(file, word):
     occurrences = []
 
-    for i, line in enumerate(file["linhas_do_arquivo"]):
+    for i, line in enumerate(file["linhas_do_arquivo"]):  # O(n)
         if len(re.findall(word, line, re.IGNORECASE)) > 0:
             occurrences.append({"linha": i + 1, "conteudo": line})
 
