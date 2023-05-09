@@ -44,4 +44,18 @@ def exists_word(word, instance):
 
 
 def search_by_word(word, instance):
-    """Aqui irá sua implementação"""
+    files = get_all_files(instance)
+    matches = []
+
+    if len(files) > 0:
+        for file in files:
+            occurrences = find_occurrences(file, word)
+            if len(occurrences) > 0:
+                match = {
+                    "palavra": word,
+                    "arquivo": file["nome_do_arquivo"],
+                    "ocorrencias": occurrences,
+                }
+                matches.append(match)
+
+    return matches
